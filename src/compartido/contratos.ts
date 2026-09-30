@@ -1,9 +1,12 @@
-/** Contrato de verificación de reglas: centraliza cómo se rechaza un estado inválido. */
+// interfaz de clase guardia con aseguraciones de reglas
 export interface IGuardia {
   asegurar(condicion: boolean, crearError: () => Error): void;
 }
-
-/** Contrato de validación de valores numéricos del dominio. */
+// validador de enteros positivos
 export interface IValidadorEntero {
   exigirEnteroPositivo(valor: number, crearError: () => Error): void;
 }
+
+/*
+todo: definir contratos para otros componentes
+*/
