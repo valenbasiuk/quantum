@@ -1,0 +1,28 @@
+{
+  "name": "simulador-so-ts",
+  "version": "1.0.0",
+  "description": "Biblioteca de clases: simulador de procesos y memoria (AE2 intercátedra SO + PLP II, UCP 2026)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "author": "Diego Valentino Basiuk Fetter",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "@vitest/coverage-v8": "^3.2.7",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}
