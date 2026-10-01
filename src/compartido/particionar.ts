@@ -4,6 +4,7 @@
  * por elemento y en orden, lo que permite usarlo para intentos secuenciales
  * (por ejemplo, asignar memoria en orden de registro).
  */
+// TODO: Esta funcion nos va a servir clave para separar los procesos que logran entrar a memoria de los que quedan en espera
 export function particionar<T>(elementos: readonly T[], predicado: (elemento: T) => boolean): [T[], T[]] {
   return elementos.reduce<[T[], T[]]>(
     (grupos, elemento) => {
@@ -13,3 +14,4 @@ export function particionar<T>(elementos: readonly T[], predicado: (elemento: T)
     [[], []],
   );
 }
+
