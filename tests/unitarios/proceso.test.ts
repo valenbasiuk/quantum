@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { IEventoES } from '../../src/index.js';
-import { EstadoProceso, Proceso, SinEventoES, TransicionInvalidaError } from '../../src/index.js';
+import { EstadoProceso, EventoES, EventoProceso, Proceso, SinEventoES, TablaTransiciones, TransicionInvalidaError } from '../../src/index.js';
 
 const enEjecucion = (cpu = 3, evento: IEventoES = new SinEventoES()) => {
   const p = new Proceso('P1', 100, cpu, evento);
@@ -57,5 +57,57 @@ describe('Proceso (PCB) - transiciones protegidas', () => {
     p.ejecutarUnidad();
     p.renovarQuantum();
     expect(p.quantumConsumido()).toBe(0);
+  });
+
+  it('bloqueo: toma la duración del evento y la descuenta hasta vencer', () => {
+    const p = enEjecucion(3, new EventoES(1, 2));
+    p.ejecutarUnidad();
+    expect(p.debeBloquearse()).toBe(true);
+    p.bloquear();
+    expect(p.bloqueoRestante()).toBe(2);
+    p.avanzarBloqueo();
+    expect(p.bloqueoVencido()).toBe(false);
+    p.avanzarBloqueo();
+    expect(p.bloqueoVencido()).toBe(true);
+    p.desbloquear();
+    expect(p.estado()).toBe(EstadoProceso.LISTO);
+  });
+
+  it('el evento de E/S se dispara una sola vez', () => {
+    const p = enEjecucion(4, new EventoES(1, 1));
+    p.ejecutarUnidad();
+    expect(p.debeBloquearse()).toBe(true);
+    p.bloquear();
+    p.avanzarBloqueo();
+    p.desbloquear();
+    p.despachar();
+    p.ejecutarUnidad();
+    expect(p.debeBloquearse()).toBe(false);
+  });
+
+  it('expone sus datos de identificación y la instantánea congelada', () => {
+    const p = new Proceso('P9', 64, 7);
+    expect([p.pid(), p.memoriaRequerida(), p.cpuTotal(), p.cpuRestante()]).toEqual(['P9', 64, 7, 7]);
+    expect(Object.isFrozen(p.instantanea())).toBe(true);
+  });
+
+  it('la tabla de transiciones valida (estado, evento) y no permite saltar estados', () => {
+    const tabla = new TablaTransiciones();
+    expect(tabla.permite(EstadoProceso.NUEVO, EventoProceso.DESPACHAR)).toBe(false);
+    expect(tabla.permite(EstadoProceso.BLOQUEADO, EventoProceso.DESPACHAR)).toBe(false);
+    expect(tabla.permite(EstadoProceso.NUEVO, EventoProceso.DESBLOQUEAR)).toBe(false);
+    expect(tabla.permite(EstadoProceso.EJECUTANDO, EventoProceso.BLOQUEAR)).toBe(true);
+    expect(tabla.destino(EventoProceso.BLOQUEAR)).toBe(EstadoProceso.BLOQUEADO);
+  });
+
+  it('un proceso Listo no puede volver a ser admitido', () => {
+    const p = new Proceso('P1', 10, 2);
+    p.admitir();
+    expect(() => p.admitir()).toThrow(TransicionInvalidaError);
+  });
+
+  it('SinEventoES nunca dispara', () => {
+    const nulo = new SinEventoES();
+    expect([nulo.seDisparaCon(), nulo.duracion(), nulo.trasTicksCpu()]).toEqual([false, 0, 0]);
   });
 });
