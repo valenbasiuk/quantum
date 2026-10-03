@@ -1,8 +1,6 @@
-/**
- * Raíz de los errores del simulador. Aquí sí hay herencia justificada:
- * cada error concreto "es un" ErrorDominio y puede capturarse por la base.
- * Permite distinguir fallos de reglas de negocio de bugs no controlados.
- */
+// raiz de los errores del simulador. la herencia aqui esta justificada:
+// cada error concreto es un ErrorDominio y puede capturarse por la base.
+// permite distinguir fallos de reglas de negocio de bugs no controlados
 export class ErrorDominio extends Error {
   constructor(mensaje: string) {
     super(mensaje);

@@ -1,0 +1,28 @@
+// api publica de la biblioteca. no hay main ni salida por consola
+export * from './errores/ErrorDominio.js';
+export * from './procesos/EstadoProceso.js';
+export * from './procesos/EventoProceso.js';
+export * from './procesos/Proceso.js';
+export * from './procesos/EventoES.js';
+export * from './procesos/TablaTransiciones.js';
+export * from './memoria/BloqueMemoria.js';
+export * from './memoria/AdministradorMemoria.js';
+export * from './memoria/politicas/PoliticaAsignacion.js';
+export * from './memoria/politicas/PrimerAjuste.js';
+export * from './memoria/politicas/MejorAjuste.js';
+export * from './memoria/politicas/PeorAjuste.js';
+export * from './planificacion/PlanificadorRoundRobin.js';
+export * from './entrada-salida/GestorES.js';
+export * from './admision/ControladorAdmision.js';
+export * from './metricas/RecolectorMetricas.js';
+export * from './configuracion/ConfiguracionSimulacion.js';
+export * from './simulacion/Simulador.js';
+export * from './simulacion/FabricaSimulador.js';
+export type * from './procesos/contratos.js';
+export type * from './memoria/contratos.js';
+export type * from './planificacion/contratos.js';
+export type * from './entrada-salida/contratos.js';
+export type * from './admision/contratos.js';
+export type * from './metricas/contratos.js';
+export type * from './configuracion/contratos.js';
+export type * from './simulacion/contratos.js';

@@ -1,7 +1,7 @@
 import type { IGuardia, IValidadorEntero } from './contratos.js';
 import { guardia } from './Guardia.js';
 
-/** Valida que un parámetro del dominio sea un entero estrictamente positivo. */
+// valida que un parametro del dominio sea un entero estrictamente positivo
 export class ValidadorEntero implements IValidadorEntero {
   constructor(private readonly _guardia: IGuardia = guardia) {}
 
