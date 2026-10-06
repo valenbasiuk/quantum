@@ -1,0 +1,18 @@
+{
+  "name": "simulador-so-consola",
+  "version": "1.0.0",
+  "description": "Aplicación de consola (AE2 Sistemas Operativos) que usa la biblioteca simulador-so-ts",
+  "author": "Diego Valentino Basiuk Fetter",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "simular": "tsx src/main.ts",
+    "comparar": "tsx src/main.ts --comparar --escenario comparativo",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
