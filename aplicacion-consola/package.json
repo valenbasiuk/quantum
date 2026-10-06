@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "simular": "tsx src/main.ts",
+    "paso": "tsx src/main.ts --paso",
     "comparar": "tsx src/main.ts --comparar --escenario comparativo",
     "typecheck": "tsc -p tsconfig.json"
   },

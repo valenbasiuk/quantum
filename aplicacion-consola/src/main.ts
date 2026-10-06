@@ -101,7 +101,8 @@ async function simular(opciones: OpcionesConsola): Promise<void> {
         return `AVISO      ${pid}: finalización forzada no implementada en la biblioteca`;
       });
     console.log(presentador.presentar(sim, [...llegadas, ...ejecuto, ...detector.detectar(antes, despues), ...forzadas]));
-    await Promise.all(teclado.map((t) => t.question('Enter para el próximo tick...')));
+    await Promise.all(teclado.map((t) => t.question('\nENTER para avanzar al tick siguiente ')));
+    if (opciones.paso) console.log('');
   }
   teclado.forEach((t) => t.close());
   console.log(resumenFinal(sim));
