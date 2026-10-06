@@ -1,4 +1,4 @@
-import type { ISimulador, IVistaBloque } from '../../biblioteca-simulador/src/index.js';
+import type { ISimulador, IVistaBloque } from '../../src/index.js';
 import type { IPresentadorTick } from './contratos.js';
 
 const ANCHO = 78;

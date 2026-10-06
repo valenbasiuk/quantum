@@ -13,8 +13,8 @@
  *   npx tsx src/main.ts --listar
  */
 import { createInterface } from 'node:readline/promises';
-import { MejorAjuste, PeorAjuste, PrimerAjuste, Simulador } from '../../biblioteca-simulador/src/index.js';
-import type { IPoliticaAsignacion, ISimulador } from '../../biblioteca-simulador/src/index.js';
+import { MejorAjuste, PeorAjuste, PrimerAjuste, Simulador } from '../../src/index.js';
+import type { IPoliticaAsignacion, ISimulador } from '../../src/index.js';
 import type { FotoProceso, OpcionesConsola } from './contratos.js';
 import { ESCENARIOS } from './Escenarios.js';
 import { DetectorEventos } from './DetectorEventos.js';
@@ -93,8 +93,12 @@ async function simular(opciones: OpcionesConsola): Promise<void> {
     const forzadas = [liberaciones.get(`${sim.estado().tick}`)]
       .filter((pid): pid is string => pid !== undefined)
       .map((pid) => {
-        sim.finalizarProceso(pid);
-        return `FORZADO    ${pid} se finaliza por pedido y libera su memoria`;
+        const conFinalizar = sim as unknown as { finalizarProceso?(p: string): void };
+        if (typeof conFinalizar.finalizarProceso === 'function') {
+          conFinalizar.finalizarProceso(pid);
+          return `FORZADO    ${pid} se finaliza por pedido y libera su memoria`;
+        }
+        return `AVISO      ${pid}: finalización forzada no implementada en la biblioteca`;
       });
     console.log(presentador.presentar(sim, [...llegadas, ...ejecuto, ...detector.detectar(antes, despues), ...forzadas]));
     await Promise.all(teclado.map((t) => t.question('Enter para el próximo tick...')));

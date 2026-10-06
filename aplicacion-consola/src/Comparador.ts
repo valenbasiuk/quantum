@@ -1,5 +1,5 @@
-import { MejorAjuste, PeorAjuste, PrimerAjuste, Simulador } from '../../biblioteca-simulador/src/index.js';
-import type { IPoliticaAsignacion, ISimulador } from '../../biblioteca-simulador/src/index.js';
+import { MejorAjuste, PeorAjuste, PrimerAjuste, Simulador } from '../../src/index.js';
+import type { IPoliticaAsignacion, ISimulador } from '../../src/index.js';
 import type { IComparador, IEscenario } from './contratos.js';
 import { PresentadorTick } from './PresentadorTick.js';
 import { CargadorEscenario } from './CargadorEscenario.js';

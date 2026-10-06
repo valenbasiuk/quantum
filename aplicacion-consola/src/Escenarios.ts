@@ -1,4 +1,4 @@
-import { EventoES } from '../../biblioteca-simulador/src/index.js';
+import { EventoES } from '../../src/index.js';
 import type { DefinicionProceso, IEscenario } from './contratos.js';
 
 /** Escenario definido por datos: nombre, descripción y lista de procesos. */

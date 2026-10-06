@@ -1,4 +1,4 @@
-import type { ISimulador } from '../../biblioteca-simulador/src/index.js';
+import type { ISimulador } from '../../src/index.js';
 import type { IEscenario } from './contratos.js';
 
 export interface ICargadorEscenario {

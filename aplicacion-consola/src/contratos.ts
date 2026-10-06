@@ -1,4 +1,4 @@
-import type { IEventoES, ISimulador } from '../../biblioteca-simulador/src/index.js';
+import type { IEventoES, ISimulador } from '../../src/index.js';
 
 /** Un proceso de un escenario: sus datos y el tick en que aparece en el sistema. */
 export interface DefinicionProceso {
